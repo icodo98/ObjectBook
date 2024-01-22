@@ -1,12 +1,12 @@
 public abstract class Employee {
     public String name;
 
-    protected int baseSalary;
-
-    public Employee(String name, int baseSalary) {
+    public Employee(String name) {
         this.name = name;
-        this.baseSalary = baseSalary;
+
     }
 
-    abstract public int calculatePay();
+    abstract public int getMonthlySalary();
+
+    abstract public int getBaseSalary();
 }

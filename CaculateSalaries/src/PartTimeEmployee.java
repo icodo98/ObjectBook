@@ -1,23 +1,26 @@
 public class PartTimeEmployee extends Employee {
 
     private float workingHours;
+    private int hourlySalary;
 
-    public PartTimeEmployee(String name, int baseSalary, float workingHours) {
-        super(name, baseSalary);
+    public PartTimeEmployee(String name, int hourlySalary, float workingHours) {
+        super(name);
         this.workingHours = workingHours;
     }
 
     @Override
-    public int calculatePay() {
-        return Math.round(baseSalary * workingHours);
+    public int getMonthlySalary() {
+        return Math.round(hourlySalary * workingHours);
     }
 
     public float getWorkingHours() {
         return workingHours;
     }
 
-    public void setWorkingHours(float workingHours) {
-        this.workingHours = workingHours;
+    @Override
+    public int getBaseSalary() {
+        /// 알바생의 경우 baseSalary가 없음.
+        return 0;
     }
 
 }

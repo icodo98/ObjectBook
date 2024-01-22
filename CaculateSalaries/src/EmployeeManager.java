@@ -6,46 +6,40 @@ public class EmployeeManager {
     private List<Employee> employeeList;
 
     private EmployeeManager() {
-        employeeList = new ArrayList<>();
+        /// 테스트를 위하여 기본적인 정보를 담은 객체 생성.
+        employeeList = new ArrayList<>() {
+            {
+                add(new FullTimeEmployee("이주영", 1000000));
+                add(new FullTimeEmployee("김싸피", 5000000));
+                add(new PartTimeEmployee("이싸피", 15000, 3));
+            }
+        };
     }
 
     public static EmployeeManager getInstance() {
-        if (instance != null) {
-            return instance;
-        } else {
-            instance = new EmployeeManager();
-            return instance;
-        }
+        return instance;
     }
 
     public int getTotalBaseSalary() {
         int sum = 0;
         for (Employee employee : employeeList) {
-            sum += employee.calculatePay();
+            sum += employee.getMonthlySalary();
         }
         return sum;
     }
 
-    public Employee[] getEmployeeByName(String name) {
-        List<Employee> rtnEmployees = new ArrayList<>();
+    public Employee getEmployeeByName(String name) {
+
         for (Employee employee : employeeList) {
             if (employee.name.equals(name)) {
-                rtnEmployees.add(employee);
+                return employee;
             }
         }
-        return rtnEmployees.toArray(new Employee[0]);
+        return null;
     }
 
     public int calculatePay(Employee employee) {
-        return employeeList.get(employeeList.indexOf(employee)).calculatePay();
-    }
-
-    public int calculatePay() {
-        int sumOfBase = 0;
-        for (Employee employee : employeeList) {
-            sumOfBase += employee.calculatePay();
-        }
-        return sumOfBase;
+        return employeeList.get(employeeList.indexOf(employee)).getMonthlySalary();
     }
 
 }
